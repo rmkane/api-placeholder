@@ -1,9 +1,20 @@
 const fs = require('fs');
 const { createCanvas } = require('canvas');
 
+const HEX_PATTERN = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
+
 const toHex = v => v.toString(16).padStart(2, '0');
 const colorToHex = (r, g, b) => `#${toHex(r)}${toHex(g)}${toHex(b)}`
 const invertColor = (r, g, b) => colorToHex((255 - r),(255 - g),(255 - b));
+
+const hexToRgb = (hex) => {
+    const result = HEX_PATTERN.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
 
 const defaultOptions = {
     width: 640,
@@ -40,11 +51,11 @@ const createImage = (options = {}) => {
     context.fillStyle = textColor;
     context.font = `${height / 10}px ${font}`;
     
-    const textSize = context.measureText(text);
-    context.fillText(text , (canvas.width / 2) - (textSize.width / 2), (canvas.height / 2));
-    
-    const buffer = canvas.toBuffer('image/png');
-    fs.writeFileSync(filename, buffer);
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText(text , canvas.width / 2, canvas.height / 2);
+
+    fs.writeFileSync(filename, canvas.toBuffer('image/png'));
 };
 
-module.exports = { createImage };
+module.exports = { createImage, hexToRgb };

@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 
 const { createDirectory } = require('./app/file.js');
-const { createImage } = require('./app/image.js');
+const { createImage, hexToRgb } = require('./app/image.js');
 
 require('dotenv').config();
 
@@ -50,10 +50,25 @@ for (const key of Object.keys(database)) {
 app.get('/api/posts/:id/comments', (req, res) =>
     res.send(comments.filter(({ postId }) => postId === parseInt(req.params['id'], 10))));
 
-app.get('/api/image', (req, res) => {
-    createImage({
-        filename: path.join(imagesDir, 'kevin.png')
-    });
+app.get('/api/image/:size/:color', (req, res) => {
+    const color = req.params['color'].toLowerCase();
+    const { r: red, g: green, b: blue } = hexToRgb(color);
+    const size =  parseInt(req.params['size']);
+    const filename = path.join(imagesDir, `${color}-${size}.png`);
+
+    if (!fs.existsSync(filename)) {
+        createImage({
+            red,
+            green,
+            blue,
+            width: size,
+            height: size,
+            text: `${size}×${size}`,
+            filename
+        });
+    }
+
+    res.sendFile(filename);
 });
 
 app.listen(port, () => {
