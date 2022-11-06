@@ -1,0 +1,28 @@
+
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Roboto;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: aquamarine;
+}
+
+main {
+    padding: 1rem;
+}
+
+h1 {
+    color: brown;
+}
