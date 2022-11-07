@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const { createCanvas } = require('canvas');
 
 const HEX_PATTERN = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
@@ -58,4 +59,23 @@ const createImage = (options = {}) => {
     fs.writeFileSync(filename, canvas.toBuffer('image/png'));
 };
 
-module.exports = { createImage, hexToRgb };
+const loadImage = (imagesDir, color, size) => {
+  const { r: red, g: green, b: blue } = hexToRgb(color);
+  const filename = path.join(imagesDir, `${color}-${size}.png`);
+
+  if (!fs.existsSync(filename)) {
+      createImage({
+          red,
+          green,
+          blue,
+          width: size,
+          height: size,
+          text: `${size}×${size}`,
+          filename
+      });
+  }
+
+  return filename;
+};
+
+module.exports = { createImage, loadImage };

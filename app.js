@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { faker } = require('@faker-js/faker');
 
+const { randomRecords } = require('./app/fake');
 const { createDirectory } = require('./app/file.js');
-const { createImage, hexToRgb } = require('./app/image.js');
+const { loadImage } = require('./app/image.js');
 
 require('dotenv').config();
 
@@ -34,7 +34,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Allow certain node_modules to be loaded in the browser
 // https://stackoverflow.com/questions/27464168#answer-55700773
-const module_dependencies = ['@fontsource/roboto', 'normalize.css'];
+const module_dependencies = [
+    '@fontsource/roboto',
+    'normalize.css',
+    'prismjs'
+];
 module_dependencies.forEach(dep => {
     app.use(`/libs/${dep}`, express.static(path.resolve(`node_modules/${dep}`)));
 });
@@ -120,42 +124,23 @@ app.get('/api/users/:id/todos', (req, res) => {
 
 // Random
 app.post(`/api/random`, (req, res) => {
-    const { count = 10 } = req.body ?? {};
+    const { count = 10, fields = [] } = req.body ?? {};
 
-    console.log('BODY:', req.body);
-    console.log('COUNT:', count);
+    if (fields.length === 0) {
+        res.status(400).send({
+            message: 'Did not specifiy fields'
+        });
+        return;
+    }
 
-    res.send([{
-        userId: faker.datatype.uuid(),
-        username: faker.internet.userName(),
-        email: faker.internet.email(),
-        avatar: faker.image.avatar(),
-        password: faker.internet.password(),
-        birthdate: faker.date.birthdate(),
-        registeredAt: faker.date.past(),
-    }]);
+    res.send(randomRecords(count, fields));
 });
 
 // Image
 app.get('/api/image/:size/:color', (req, res) => {
     const color = req.params['color'].toLowerCase();
-    const { r: red, g: green, b: blue } = hexToRgb(color);
     const size =  parseInt(req.params['size']);
-    const filename = path.join(imagesDir, `${color}-${size}.png`);
-
-    if (!fs.existsSync(filename)) {
-        createImage({
-            red,
-            green,
-            blue,
-            width: size,
-            height: size,
-            text: `${size}×${size}`,
-            filename
-        });
-    }
-
-    res.sendFile(filename);
+    res.sendFile(loadImage(imagesDir, color, size));
 });
 
 app.listen(port, () => {

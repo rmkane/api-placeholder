@@ -6,14 +6,19 @@
         <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
         <title>API Placeholder</title>
         <link rel="stylesheet" href="libs/normalize.css/normalize.css">
+        <link rel="stylesheet" href="libs/prismjs/themes/prism-okaidia.css">
         <link rel="stylesheet" href="libs/@fontsource/roboto/300.css">
         <link rel="stylesheet" href="css/style.css">
+        <script src="libs/prismjs/components/prism-core.min.js"></script>
+	    <script src="libs/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
+        <script src="js/script.js"></script>
     </head>
     <body>
         <header>
             <h1>API Placeholder</h1>
         </header>
-        <main>
+        <nav>
+            <h2>Table of Contents</h2>
             <div id="toc">
                 <ol>
                     <li><a href="#endpoints">Endpoints</a></li>
@@ -34,6 +39,8 @@
                     </ol>
                 </ol>
             </div>
+        </nav>
+        <main>
             <h2 id="#endpoints">Endpoints</h2>
             <h3 id="#static">Static</h3>
             <h4 id="#albums">Albums</h4>
@@ -42,26 +49,29 @@
                 <li><a href="http://localhost:3000/api/albums/1">/api/albums/1</a></li>
                 <li><a href="http://localhost:3000/api/albums/1/photos">/api/albums/1/photos</a></li>
             </ul>
-            <code>
-                fetch('http://localhost:3000/api/albums', { method: 'GET' }).then(res => res.json()).then(data => console.log(data));
-            </code>
+            <pre><code class="language-js">
+                fetch('http://localhost:3000/api/albums', { method: 'GET' })
+                    .then(res => res.json()).then(data => console.log(data));
+            </code></pre>
             <h4 id="#comments">Comments</h4>
             <ul>
                 <li><a href="http://localhost:3000/api/comments">/api/comments</a></li>
                 <li><a href="http://localhost:3000/api/comments?postId=1">/api/comments?postId=1</a></li>
                 <li><a href="http://localhost:3000/api/comments/1">/api/comments/1</a></li>
             </ul>
-            <code>
-                fetch('http://localhost:3000/api/comments', { method: 'GET' }).then(res => res.json()).then(data => console.log(data));
-            </code>
+            <pre><code class="language-js">
+                fetch('http://localhost:3000/api/comments', { method: 'GET' })
+                    .then(res => res.json()).then(data => console.log(data));
+            </code></pre>
             <h4 id="#photos">Photos</h4>
             <ul>
                 <li><a href="http://localhost:3000/api/photos">/api/photos</a></li>
                 <li><a href="http://localhost:3000/api/photos/1">/api/photos/1</a></li>
             </ul>
-            <code>
-                fetch('http://localhost:3000/api/photos', { method: 'GET' }).then(res => res.json()).then(data => console.log(data));
-            </code>
+            <pre><code class="language-js">
+                fetch('http://localhost:3000/api/photos', { method: 'GET' })
+                    .then(res => res.json()).then(data => console.log(data));
+            </code></pre>
             <h4 id="#posts">Posts</h4>
             <ul>
                 <li><a href="http://localhost:3000/api/posts">/api/posts</a></li>
@@ -69,17 +79,19 @@
                 <li><a href="http://localhost:3000/api/posts/1">/api/posts/1</a></li>
                 <li><a href="http://localhost:3000/api/posts/1/comments">/api/posts/1/comments</a></li>
             </ul>
-            <code>
-                fetch('http://localhost:3000/api/posts', { method: 'GET' }).then(res => res.json()).then(data => console.log(data));
-            </code>
+            <pre><code class="language-js">
+                fetch('http://localhost:3000/api/posts', { method: 'GET' })
+                    .then(res => res.json()).then(data => console.log(data));
+            </code></pre>
             <h4 id="#todos">Todos</h4>
             <ul>
                 <li><a href="http://localhost:3000/api/todos">/api/todos</a></li>
                 <li><a href="http://localhost:3000/api/todos/1">/api/todos/1</a></li>
             </ul>
-            <code>
-                fetch('http://localhost:3000/api/todos', { method: 'GET' }).then(res => res.json()).then(data => console.log(data));
-            </code>
+            <pre><code class="language-js">
+                fetch('http://localhost:3000/api/todos', { method: 'GET' })
+                    .then(res => res.json()).then(data => console.log(data));
+            </code></pre>
             <h4 id="#users">Users</h4>
             <ul>
                 <li><a href="http://localhost:3000/api/users">/api/users</a></li>
@@ -88,26 +100,56 @@
                 <li><a href="http://localhost:3000/api/users/1/posts">/api/users/1/posts</a></li>
                 <li><a href="http://localhost:3000/api/users/1/todos">/api/users/1/todos</a></li>
             </ul>
-            <code>
-                fetch('http://localhost:3000/api/users', { method: 'GET' }).then(res => res.json()).then(data => console.log(data));
-            </code>
+            <pre><code class="language-js">
+                fetch('http://localhost:3000/api/users', { method: 'GET' })
+                    .then(res => res.json()).then(data => console.log(data));
+            </code></pre>
             <hr />
             <h3 id="#dynamic">Dynamic</h3>
             <h4 id="#random">Random</h4>
             <ul>
                 <li><a href="http://localhost:3000/api/random">/api/random</a></li>
             </ul>
-            <code>
+            <h5>Field Types</h5>
+            <ul>
+                <li>ANIMAL</li>
+                <li>BIRTHDATE</li>
+                <li>CITY</li>
+                <li>COLOR</li>
+                <li>EMAIL</li>
+                <li>FINANCE</li>
+                <li>FULL_NAME</li>
+                <li>GIVEN_NAME</li>
+                <li>GENRE</li>
+                <li>PARAGRAPH</li>
+                <li>PASSWORD</li>
+                <li>PATHNAME</li>
+                <li>PHONE</li>
+                <li>SEX</li>
+                <li>SURNAME</li>
+                <li>USERNAME</li>
+                <li>UUID</li>
+                <li>ZIP</li>
+            </ul>
+            <pre><code class="language-js">
                 fetch('http://localhost:3000/api/random', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ count: 20 })
+                    body: JSON.stringify({
+                        count: 5,
+                        fields: {
+                            name: 'GIVEN_NAME',
+                            genre: 'GENRE',
+                            description: 'PARAGRAPH',
+                            price: 'FINANCE'
+                        }
+                    })
                 })
                     .then(res => res.json())
                     .then(data => console.log(data));
-            </code>
+            </code></pre>
         </main>
     </body>
 </html>

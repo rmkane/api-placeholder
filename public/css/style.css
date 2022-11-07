@@ -16,13 +16,21 @@ body {
 header {
     display: flex;
     justify-content: center;
-    background-color: aquamarine;
+    background-color: coral;
+}
+
+nav {
+    padding: 0 1rem;
 }
 
 main {
-    padding: 1rem;
+    padding: 0 1rem;
 }
 
 h1 {
-    color: brown;
+    color: white;
+}
+
+#toc ol {
+    list-style-type: none;
 }
