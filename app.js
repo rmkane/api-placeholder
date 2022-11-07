@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // https://stackoverflow.com/questions/27464168#answer-55700773
 const module_dependencies = [
     '@fontsource/roboto',
+    '@fontsource/roboto-mono',
     'normalize.css',
     'prismjs'
 ];
@@ -139,7 +140,7 @@ app.post(`/api/random`, (req, res) => {
 // Image
 app.get('/api/image/:size/:color', (req, res) => {
     const color = req.params['color'].toLowerCase();
-    const size =  parseInt(req.params['size']);
+    const size = parseInt(req.params['size']);
     res.sendFile(loadImage(imagesDir, color, size));
 });
 

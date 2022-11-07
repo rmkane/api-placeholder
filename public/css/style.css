@@ -34,3 +34,18 @@ h1 {
 #toc ol {
     list-style-type: none;
 }
+
+pre[class*="language-"] {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+}
+pre[class*="language-"],
+pre code[class*="language-"] {
+    line-height: 1.33;
+}
+
+[data-type="field-types"] li {
+    font-family: 'Roboto Mono', monospace;
+    font-size: smaller;
+    font-weight: bold;
+}
