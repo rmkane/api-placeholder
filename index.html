@@ -35,6 +35,7 @@
                         </ol>
                         <li><a href="#dynamic">Dynamic</a></li>
                         <ol>
+                            <li><a href="#image">Image</a></li>
                             <li><a href="#random">Random</a></li>
                         </ol>
                     </ol>
@@ -44,6 +45,7 @@
         <main>
             <h2 id="endpoints">Endpoints</h2>
             <h3 id="static">Static</h3>
+            <p>The following REST endpoints mimic the endpoints found at <a href="https://jsonplaceholder.typicode.com/">JSONPlaceholder</a>.</p>
             <h4 id="albums">Albums</h4>
             <ul>
                 <li><a href="http://localhost:3000/api/albums">/api/albums</a></li>
@@ -105,9 +107,18 @@
                 fetch('http://localhost:3000/api/users', { method: 'GET' })
                     .then(res => res.json()).then(data => console.log(data));
             </code></pre>
-            <hr />
             <h3 id="dynamic">Dynamic</h3>
+            <h4 id="image">Image</h4>
+            <p>The following REST endpoint mimics a URL scheme similar to <a href="https://placeholder.com/">Placeholder.com</a>.</p>
+            <ul>
+                <li><a href="http://localhost:3000/api/image/300/ff7f50">/api/image/300/ff7f50</a></li>
+            </ul>
+            <pre><code class="language-js">
+                fetch('http://localhost:3000/api/image/300/ff7f50', { method: 'GET' })
+                    .then(res => res.blob()).then(blob => console.log(blob));
+            </code></pre>
             <h4 id="random">Random</h4>
+            <p>Generate a list of records from a map of fields.</p>
             <ul>
                 <li><a href="http://localhost:3000/api/random">/api/random</a></li>
             </ul>
