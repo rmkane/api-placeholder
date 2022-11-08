@@ -76,7 +76,7 @@ const commentController = (app, database) => {
         const {
             body = existingComment?.body ?? '',
             email = existingComment?.email ?? '',
-            id,
+            id = existingComment.id,
             name = existingComment?.name ?? '',
             postId = existingComment?.postId ?? '',
 
