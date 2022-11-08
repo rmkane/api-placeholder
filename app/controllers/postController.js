@@ -84,15 +84,16 @@ const postController = (app, database) => {
     });
     app.delete('/api/posts/:id', (req, res) => {
         const existingPost = database.posts.find(({ id }) => id === parseInt(req.params['id'], 10));
-        if (existingPost) {
-            res.status(200).send({
-                message: 'Post successfully deleted'
-            });
-        } else {
+        if (!existingPost) {
             res.status(404).send({
                 message: `Post with id ${req.params['id']} does not exist`
             });
+            return;
         }
+
+        res.status(200).send({
+            message: 'Post successfully deleted'
+        });
     });
 };
 

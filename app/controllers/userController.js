@@ -188,15 +188,16 @@ const userController = (app, database) => {
     });
     app.delete('/api/users/:id', (req, res) => {
         const existingUser = database.users.find(({ id }) => id === parseInt(req.params['id'], 10));
-        if (existingUser) {
-            res.status(200).send({
-                message: 'User successfully deleted'
-            });
-        } else {
+        if (!existingUser) {
             res.status(404).send({
                 message: `User with id ${req.params['id']} does not exist`
             });
+            return;
         }
+
+        res.status(200).send({
+            message: 'User successfully deleted'
+        });
     });
 };
 
