@@ -55,7 +55,7 @@ const postController = (app, database) => {
         } = req.body ?? {};
         if (id == null || id !== +req.params.id) {
             res.status(400).send({
-                message: `The provided id '${id}' does not match '${req.params['id']}'`
+                message: `The provided id '${id}' does not match '${req.params.id}'`
             });
             return;
         }
@@ -63,7 +63,7 @@ const postController = (app, database) => {
             body,
             id,
             title,
-            userId,
+            userId
         };
         res.send(replacedPost);
     });
@@ -84,7 +84,7 @@ const postController = (app, database) => {
         } = req.body ?? {};
         if (id == null || id !== +req.params.id) {
             res.status(400).send({
-                message: `The provided id '${id}' does not match '${req.params['id']}'`
+                message: `The provided id '${id}' does not match '${req.params.id}'`
             });
             return;
         }
