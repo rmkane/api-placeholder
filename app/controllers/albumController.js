@@ -2,8 +2,8 @@ const albumController = (app, database) => {
     const findById = (id) =>
         database.albums.find((album) => album.id === id);
 
-    const findPhotosByAlbumId = (id) =>
-        database.photos.filter(({ albumId }) => albumId === id);
+    const findPhotosByAlbumId = (albumId) =>
+        database.photos.filter((photo) => photo.albumId === albumId);
 
     app.get(`/api/albums`, (req, res) => {
         res.send(database.albums);

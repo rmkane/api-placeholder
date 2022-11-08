@@ -1,19 +1,36 @@
 const userController = (app, database) => {
+    const findById = (id) =>
+        database.users.find((users) => users.id === id);
+
+    const findAlbumsByUserId = (userId) =>
+        database.albums.filter((album) => album.userId === userId);
+
+    const findPostsByUserId = (userId) =>
+        database.posts.filter((post) => post.userId === userId);
+
+    const findTodosByUserId = (userId) =>
+        database.todos.filter((todo) => todo.userId === userId);
+
     app.get(`/api/users`, (req, res) => {
         res.send(database.users);
     });
+
     app.get(`/api/users/:id`, (req, res) => {
-        res.send(database.users.find(({ id }) => id === parseInt(req.params['id'], 10)));
+        res.send(findById(+req.params.id));
     });
+
     app.get('/api/users/:id/albums', (req, res) => {
-        res.send(database.albums.filter(({ userId }) => userId === parseInt(req.params['id'], 10)));
+        res.send(findAlbumsByUserId(+req.params.id));
     });
+
     app.get('/api/users/:id/posts', (req, res) => {
-        res.send(database.posts.filter(({ userId }) => userId === parseInt(req.params['id'], 10)));
+        res.send(findPostsByUserId(+req.params.id));
     });
+
     app.get('/api/users/:id/todos', (req, res) => {
-        res.send(database.todos.filter(({ userId }) => userId === parseInt(req.params['id'], 10)));
+        res.send(findTodosByUserId(+req.params.id));
     });
+
     app.post('/api/users', (req, res) => {
         const {
             address: {
@@ -62,11 +79,12 @@ const userController = (app, database) => {
         };
         res.send(newUser);
     });
+
     app.put(`/api/users/:id`, (req, res) => {
-        const existingUser = database.users.find(({ id }) => id === parseInt(req.params['id'], 10));
+        const existingUser = findById(+req.params.id);
         if (!existingUser) {
             res.status(404).send({
-                message: `User with id ${req.params['id']} does not exist`
+                message: `User with id ${req.params.id} does not exist`
             });
             return;
         }
@@ -93,7 +111,7 @@ const userController = (app, database) => {
             username = '',
             website = ''
         } = req.body ?? {};
-        if (id == null || id !== parseInt(req.params['id'], 10)) {
+        if (id == null || id !== +req.params.id) {
             res.status(400).send({
                 message: `The provided id '${id}' does not match '${req.params['id']}'`
             });
@@ -124,11 +142,12 @@ const userController = (app, database) => {
         };
         res.send(replacedUser);
     });
+
     app.patch(`/api/users/:id`, (req, res) => {
-        const existingUser = database.users.find(({ id }) => id === parseInt(req.params['id'], 10));
+        const existingUser = findById(+req.params.id);
         if (!existingUser) {
             res.status(404).send({
-                message: `User with id ${req.params['id']} does not exist`
+                message: `User with id ${req.params.id} does not exist`
             });
             return;
         }
@@ -155,7 +174,7 @@ const userController = (app, database) => {
             username = existingUser?.username ?? '',
             website = existingUser?.website ?? '',
         } = req.body ?? {};
-        if (id == null || id !== parseInt(req.params['id'], 10)) {
+        if (id == null || id +req.params.id) {
             res.status(400).send({
                 message: `The provided id '${id}' does not match '${req.params['id']}'`
             });
@@ -186,11 +205,12 @@ const userController = (app, database) => {
         };
         res.send(updatedUser);
     });
+
     app.delete('/api/users/:id', (req, res) => {
-        const existingUser = database.users.find(({ id }) => id === parseInt(req.params['id'], 10));
+        const existingUser = findById(+req.params.id);
         if (!existingUser) {
             res.status(404).send({
-                message: `User with id ${req.params['id']} does not exist`
+                message: `User with id ${req.params.id} does not exist`
             });
             return;
         }
