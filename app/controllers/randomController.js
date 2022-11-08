@@ -15,4 +15,4 @@ const randomController = (app) => {
     });
 };
 
-module.exports = { randomController };
+module.exports = randomController;

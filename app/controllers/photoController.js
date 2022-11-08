@@ -7,4 +7,4 @@ const photoController = (app, database) => {
     });
 };
 
-module.exports = { photoController };
+module.exports = photoController;

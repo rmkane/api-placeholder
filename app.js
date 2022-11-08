@@ -4,14 +4,14 @@ const bodyParser = require('body-parser');
 
 const { createDirectory } = require('./app/utils/file.js');
 
-const { albumController } = require('./app/controllers/albumController');
-const { commentController } = require('./app/controllers/commentController');
-const { photoController } = require('./app/controllers/photoController');
-const { postController } = require('./app/controllers/postController');
-const { todoController } = require('./app/controllers/todoController');
-const { userController } = require('./app/controllers/userController');
-const { randomController } = require('./app/controllers/randomController');
-const { imageController } = require('./app/controllers/imageController.js');
+const albumController = require('./app/controllers/albumController');
+const commentController = require('./app/controllers/commentController');
+const photoController = require('./app/controllers/photoController');
+const postController = require('./app/controllers/postController');
+const todoController = require('./app/controllers/todoController');
+const userController = require('./app/controllers/userController');
+const randomController = require('./app/controllers/randomController');
+const imageController = require('./app/controllers/imageController.js');
 
 require('dotenv').config();
 

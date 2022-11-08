@@ -116,7 +116,7 @@ const userController = (app, database) => {
                 name: companyName
             },
             email,
-            id: database.users.length + 1,
+            id,
             name,
             phone,
             username,
@@ -200,4 +200,4 @@ const userController = (app, database) => {
     });
 };
 
-module.exports = { userController };
+module.exports = userController;

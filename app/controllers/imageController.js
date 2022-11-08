@@ -8,4 +8,4 @@ const imageController = (app, imagesDir) => {
     });
 };
 
-module.exports = { imageController };
+module.exports = imageController;

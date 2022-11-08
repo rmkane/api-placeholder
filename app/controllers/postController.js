@@ -96,4 +96,4 @@ const postController = (app, database) => {
     });
 };
 
-module.exports = { postController };
+module.exports = postController;

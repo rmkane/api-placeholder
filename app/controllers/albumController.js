@@ -10,4 +10,4 @@ const albumController = (app, database) => {
     });
 };
 
-module.exports = { albumController };
+module.exports = albumController;

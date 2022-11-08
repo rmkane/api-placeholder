@@ -7,4 +7,4 @@ const todoController = (app, database) => {
     });  
 };
 
-module.exports = { todoController };
+module.exports = todoController;

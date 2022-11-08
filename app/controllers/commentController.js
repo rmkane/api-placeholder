@@ -11,4 +11,4 @@ const commentController = (app, database) => {
     });
 };
 
-module.exports = { commentController };
+module.exports = commentController;
