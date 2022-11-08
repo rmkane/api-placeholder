@@ -90,6 +90,7 @@ const albumController = (app, database) => {
             res.status(404).send({
                 message: `Album with id ${req.params.id} does not exist`
             });
+            return;
         }
 
         res.status(200).send({
